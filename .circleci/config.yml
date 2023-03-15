@@ -1,0 +1,53 @@
+# Python CircleCI 2.1 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2.1
+orbs:
+  google-artifact-orb: fresh8gaming/google-artifact-orb@1.0.1
+jobs:
+  build:
+    docker:
+      - image: docker:17.05.0-ce-git
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/app.tar
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/app.tar | true
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=app -t us-west2-docker.pkg.dev/shealsgames/shealsgames/frontend .
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar us-west2-docker.pkg.dev/shealsgames/shealsgames/frontend
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - google-artifact-orb/build-and-push-image:
+          attach-workspace: true 
+          image: us-west2-docker.pkg.dev/shealsgames/shealsgames/backend 
+          registry-url: us-west2-docker.pkg.dev 
+          registry-name: shealsgames 
+          requires:
+            - build
+          filters:
+            branches:
+               only: main
