@@ -43,7 +43,7 @@ workflows:
       - build
       - google-artifact-orb/build-and-push-image:
           attach-workspace: true 
-          image: us-west2-docker.pkg.dev/shealsgames/shealsgames/backend 
+          image: us-west2-docker.pkg.dev/shealsgames/shealsgames/frontend 
           registry-url: us-west2-docker.pkg.dev 
           registry-name: shealsgames 
           requires:
