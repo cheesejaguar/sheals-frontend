@@ -8,4 +8,4 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d/
 
 # Copy the web app files to the Nginx web root
-COPY /src/* /usr/share/nginx/html
+COPY /src/* /usr/share/nginx/html/
