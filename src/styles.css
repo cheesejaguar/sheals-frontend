@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #00FF00;
+    color: white;
+    list-style-type: none;
+    padding: 10px 20px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    perspective: 1000px;
+}
+
+li span {
+    display: inline-block;
+    transform-origin: 50% 50%;
+    transition: transform 1s;
+}
+
+li span.animation {
+    animation: rotate 1s linear;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
