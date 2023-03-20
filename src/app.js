@@ -2,7 +2,7 @@ const contentElement = document.getElementById('content');
 
 const fetchData = async () => {
     try {
-        const response = await fetch('https://api.shealsgames.com/top3/', {method: 'get'});
+        const response = await fetch('https://api.shealsgames.com/top3', {method: 'get'});
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
