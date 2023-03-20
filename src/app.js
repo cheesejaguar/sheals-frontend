@@ -15,6 +15,7 @@ const fetchData = async () => {
 
 const displayData = (data) => {
     // Assuming the JSON object contains an array of words like { "words": ["word1", "word2", "word3"] }
+    const wordListElement = document.getElementById('word-list');
     const top3Words = data.slice(0, 3);
     const existingWords = Array.from(wordListElement.children).map(li => li.textContent);
 
