@@ -11,7 +11,7 @@ This repository is set to auto-deploy every commit to the main branch into the p
 ```bash
 git checkout -b sheals-my-fancy-branch
 git add file_i_changed.png
-git commit -m "a helpful description change message, and definitely not just "fixed"
+git commit -m "a helpful description change message, and definitely not just 'fixed' "
 git push --set-upstream origin sheals-my-fancy-branch
 ```
 
